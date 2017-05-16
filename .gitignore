@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+# results file
+binary-tree/results.json
+
