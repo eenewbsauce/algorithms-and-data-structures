@@ -6,25 +6,43 @@ const sides = {
   right: 'right'
 };
 
-class BinaryTree extends TreeBase{
-  constructor(rootValue) {
-    this.rootNode = new Node(rootValue)
-    this.lastAssignedKey = false;
-    this.nextNode = this.rootNode;
+class BinaryTree extends TreeBase {
+  constructor(comparator) {
+    super();
+    this._root = null;
+    this._comparator = comparator;
+    this.size = 0;
   }
 
-  insert(value) {
-    let side = sides.left;
+  insert(data) {
+    if (this._root === null) {
+      this._root = new Node(data);
+      this.size++;
 
-    if (value > this.nextNode.value) {
-      side = sides.right;
-    }    
+      return true;
+    }
 
-    let newNode = new Node(value);
-    this.nextNode[side] = newNode;
+    let parent = null;
+    let isRight = 0;
+    let node = this._root;
 
-    if (this.nextNode.left !== null && this.nextNode.right !== null) {
-      this.nextNode = newNode;
+    while(true) {
+      if (node === null) {
+        node = new Node(data);
+        parent.setChild(isRight, node);
+        this.size++;
+
+        return true;
+      }
+
+      if (this._comparator(node.data, data) === 0) {
+        return false;
+      }
+
+      isRight = this._comparator(node.data, data) < 0;
+
+      parent = node;
+      node = node.getChild(isRight);
     }
   }
 
