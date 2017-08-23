@@ -4,19 +4,18 @@ class InsertionSort {
         let compareIndex;
     
         for (let i = 0; i <= this.list.length; i++) {
-            let requiresSwitch = false;
+            let requiresInsertion = false;
             let compareIndex = i + 1;
             let nextIndex = i;
 
             while (this.list[compareIndex] < this.list[nextIndex] && nextIndex >= 0) {
                 nextIndex--;
-                requiresSwitch = true;
+                requiresInsertion = true;
             }
 
-            if (requiresSwitch) {
+            if (requiresInsertion) {
                 let insertIndex = nextIndex < 0 ? 0 : nextIndex + 1;
-                let temp = this.list[insertIndex];
-                this._insert(insertIndex, temp, compareIndex, this.list[compareIndex]);
+                this._insert(insertIndex, compareIndex);
             }
         }
 
@@ -24,10 +23,33 @@ class InsertionSort {
         return this.list;
     }
 
-    static _insert(insertIndex, insertItem, compareIndex, switchItem) {
+    static _insert(insertIndex, compareIndex) {
+        let insertItem = this.list[insertIndex];
+        let compareItem = this.list[compareIndex];
+        let newArray = [];
+
+        for (let i = 0; i < this.list.length; i++) {
+            if (i === insertIndex) {
+                newArray[i] = compareItem;
+            } else if (i === insertIndex + 1) {
+                newArray[i] = insertItem;
+            } else if (i < insertIndex) {
+                newArray[i] = this.list[i];
+            } else if (i <= compareIndex) {
+                newArray[i] = this.list[i-1];
+            } else {
+                newArray[i] = this.list[i];
+            }
+        }
+
+        this.list = newArray;
+    }
+
+    static _insertWithSplice(insertIndex, compareIndex) {
+        let compareItem = this.list[compareIndex];
         this.list.splice(compareIndex, 1)
-        this.list.splice(insertIndex, 0, switchItem);
+        this.list.splice(insertIndex, 0, compareItem);
     }
 };
 
-InsertionSort.sort([10, 0, 3, 2, 1, 0, 2, 7, 2, 1]);
+InsertionSort.sort([2, 3, 1, 0, 1, 16, 9, 3, 2, 0, 4, 2, 1, 80, 0]);
