@@ -33,13 +33,11 @@ class InsertionSort {
                 newArray[i] = compareItem;
             } else if (i === insertIndex + 1) {
                 newArray[i] = insertItem;
-            } else if (i < insertIndex) {
+            } else if (i < insertIndex || i > compareIndex) {
                 newArray[i] = this.list[i];
             } else if (i <= compareIndex) {
                 newArray[i] = this.list[i-1];
-            } else {
-                newArray[i] = this.list[i];
-            }
+            } 
         }
 
         this.list = newArray;
