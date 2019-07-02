@@ -31,6 +31,12 @@
     },
     {
       "type": "node",
+      "request": "launch",
+      "name": "QuickSort",
+      "program": "${workspaceRoot}/quick-sort/index.js"
+    },
+    {
+      "type": "node",
       "request": "attach",
       "name": "Attach to Port",
       "address": "localhost",
