@@ -1,25 +1,26 @@
 function binarySearch(key, arr) {
-  let min = 0;
-  let max = arr.length - 1;
+  let low = 0;
+  let high = arr.length - 1;
   let iterations = 0;
 
-  while (min <= max) {
+  while (low <= high) {
     iterations++;
+    let mid = Math.floor((low + high) / 2);
+    let value = arr[mid];
 
-    if (arr[min] === key) {
-      return [min, iterations];
-    } else if (arr[max] === key) {
-      return [max, iterations];
+    if (value < key) {
+      low = mid + 1;
+    } else if (value > key) {
+      high = mid - 1;
+    } else {
+      return [mid, iterations];
     }
-
-    min += 1;
-    max -= 1;
   }
 
   return [-1, iterations];
 }
 
-const [indexForKey, interations] = binarySearch("l", [
+const [indexForKey, interations] = binarySearch("b", [
   "a",
   "b",
   "c",
