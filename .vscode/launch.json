@@ -13,6 +13,12 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Binary Search",
+      "program": "${workspaceRoot}/binary-search/index.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Euclids",
       "program": "${workspaceRoot}/euclids/index.js",
       "args": ["1112", "695"]
